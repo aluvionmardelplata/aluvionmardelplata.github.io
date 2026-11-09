@@ -1,0 +1,4 @@
+<figure class="imagen">
+  <img src="{{ '/assets/img/textos/' | append: include.archivo | relative_url }}" alt="{{ include.descripcion | default: include.epigrafe | escape }}" loading="lazy">
+  {% if include.epigrafe %}<figcaption>{{ include.epigrafe }}</figcaption>{% endif %}
+</figure>

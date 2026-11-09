@@ -1,0 +1,33 @@
+# Configuración del sitio de Aluvión
+title: Aluvión
+description: Escritos de Aluvión, trabajados en reunión y puestos a disposición de quien quiera leerlos.
+lang: es
+timezone: America/Argentina/Buenos_Aires
+lugar: Mar del Plata
+
+# Comentarios (Cusdis). Pegá entre comillas el App ID que te da cusdis.com.
+# Mientras esté vacío, los textos no muestran la sección de comentarios.
+comentarios:
+  cusdis_app_id: ""
+
+# Redes (solo el nombre de usuario, sin @ ni dirección)
+redes:
+  instagram: aluvionmardelplata
+  facebook: aluvionmardelplata
+
+# Dirección del sitio.
+# Si el repositorio se llama "<cuenta>.github.io", dejá baseurl vacío.
+# Si se llama de otra forma (por ejemplo "escritos"), poné baseurl: "/escritos".
+url: ""
+baseurl: ""
+
+permalink: /textos/:title/
+markdown: kramdown
+kramdown:
+  input: GFM
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: texto, autor: Aluvión }
+
+exclude: [GUIA.md, PLANTILLA.md, README.md, Gemfile, Gemfile.lock, vendor]

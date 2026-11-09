@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{% if page.bajada %}{{ page.bajada }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:title" content="{{ page.title | default: site.title }}">
+  <meta property="og:description" content="{% if page.bajada %}{{ page.bajada }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:image" content="{{ '/assets/img/icono.png' | absolute_url }}">
+  <link rel="icon" href="{{ '/assets/img/icono.png' | relative_url }}">
+  <link rel="preload" href="{{ '/assets/fonts/SunZoomSpark.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600&family=Encode+Sans+Condensed:wght@600;800&family=Montserrat:ital,wght@1,500;1,600&display=swap">
+  <link rel="stylesheet" href="{{ '/assets/css/aluvion.css' | relative_url }}">
+</head>
+<body>
+  <div class="envoltura">
+    <header class="cabecera">
+      <a class="logo" href="{{ '/' | relative_url }}" aria-label="Aluvión, inicio"><img src="{{ '/assets/img/aluvion-logo-blanco.png' | relative_url }}" alt="Aluvión"></a>
+      <nav class="menu" aria-label="Principal">
+        <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Escritos</a>
+        <a href="{{ '/categorias/' | relative_url }}"{% if page.url == '/categorias/' %} aria-current="page"{% endif %}>Categorías</a>
+        <a href="{{ '/sobre/' | relative_url }}"{% if page.url == '/sobre/' %} aria-current="page"{% endif %}>Sobre Aluvión</a>
+      </nav>
+    </header>
+    <div class="cuerpo">
+      <main>{{ content }}</main>
+      {% include lateral.html %}
+    </div>
+    <footer class="pie">
+      <span>Aluvión · {{ site.lugar }}</span>
+      {% include redes.html %}
+      <span>Libre para leer y compartir citando la fuente</span>
+    </footer>
+  </div>
+</body>
+</html>

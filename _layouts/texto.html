@@ -1,0 +1,18 @@
+---
+layout: default
+---
+<article>
+  <header class="texto-cabeza">
+    <span class="rotulo">{% include categoria.html p=page %} {% include fecha.html d=page.date %} · {{ page.autor }} · {% assign palabras = content | number_of_words %}{{ palabras | divided_by: 200 | plus: 1 }} min de lectura</span>
+    <h1 class="gastada">{{ page.title }}</h1>
+    {% if page.bajada %}<p class="bajada">{{ page.bajada }}</p>{% endif %}
+  </header>
+  <div class="prosa">
+    {{ content }}
+  </div>
+  <nav class="pie-texto" aria-label="Más textos">
+    {% if page.previous %}<a href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
+    {% if page.next %}<a href="{{ page.next.url | relative_url }}">{{ page.next.title }} →</a>{% endif %}
+  </nav>
+  {% include comentarios.html %}
+</article>

@@ -1,0 +1,37 @@
+<aside class="lateral">
+  <section>
+    <h2 class="rotulo">Sobre Aluvión</h2>
+    <p>En 1945 hubo quien llamó «aluvión zoológico» a la multitud que llegó a la Plaza de Mayo. Tomamos esa palabra y la levantamos con orgullo.</p>
+    <p><a href="{{ '/sobre/' | relative_url }}">Quiénes somos</a></p>
+  </section>
+  <section>
+    <h2 class="rotulo">Categorías</h2>
+    <ul class="archivo">
+      {%- assign grupos = site.posts | group_by: "categoria" | sort: "name" -%}
+      {%- for g in grupos %}{% if g.name != "" %}
+      <li><a href="{{ '/categorias/' | relative_url }}#{{ g.name | slugify }}"><span class="tit">{{ g.name }} <span class="cuenta">({{ g.size }})</span></span></a></li>
+      {%- endif %}{% endfor %}
+    </ul>
+  </section>
+  <section>
+    <h2 class="rotulo">Seguinos</h2>
+    {% include redes.html %}
+  </section>
+  <section>
+    <h2 class="rotulo">Archivo</h2>
+    <ul class="archivo">
+      {%- assign anio_previo = "" -%}
+      {%- for p in site.posts -%}
+        {%- assign anio = p.date | date: "%Y" -%}
+        {%- if anio != anio_previo %}
+      <li class="anio">{{ anio }}</li>
+        {%- assign anio_previo = anio -%}
+        {%- endif %}
+      <li><a href="{{ p.url | relative_url }}"{% if p.url == page.url %} aria-current="page"{% endif %}>
+        {%- assign m = p.date | date: "%-m" | minus: 1 -%}
+        <span class="fecha">{{ p.date | date: "%-d" }} {{ site.data.meses[m] | slice: 0, 3 }}</span>
+        <span class="tit">{{ p.title }}</span></a></li>
+      {%- endfor %}
+    </ul>
+  </section>
+</aside>

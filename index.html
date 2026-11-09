@@ -1,0 +1,18 @@
+---
+layout: default
+---
+<section class="consigna">
+  <p class="gastada grande">Fuimos y somos ese Aluvión</p>
+  <p class="chica">Escritos que trabajamos en nuestras reuniones. Están acá para quien quiera leerlos, discutirlos o llevárselos.</p>
+</section>
+<ol class="entradas" reversed>
+  {%- for p in site.posts %}
+  <li class="entrada">
+    <span class="rotulo">{% include categoria.html p=p %} {% include fecha.html d=p.date %} · {% assign palabras = p.content | number_of_words %}{{ palabras | divided_by: 200 | plus: 1 }} min</span>
+    <h2 class="gastada"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h2>
+    {% if p.bajada %}<p class="bajada">{{ p.bajada }}</p>{% endif %}
+    <p class="extracto">{{ p.content | strip_html | truncatewords: 42 }}</p>
+    <a class="seguir" href="{{ p.url | relative_url }}">Leer el texto</a>
+  </li>
+  {%- endfor %}
+</ol>

@@ -1,0 +1,19 @@
+---
+layout: default
+title: Categorías
+permalink: /categorias/
+---
+<header class="texto-cabeza">
+  <h1 class="gastada">Categorías</h1>
+</header>
+{%- assign grupos = site.posts | group_by: "categoria" | sort: "name" -%}
+{%- for g in grupos %}
+<section class="grupo" id="{{ g.name | default: 'sin-categoria' | slugify }}">
+  <h2 class="rotulo">{{ g.name | default: "Sin categoría" }} · {{ g.size }}</h2>
+  <ul class="archivo">
+    {%- for p in g.items %}
+    <li><a href="{{ p.url | relative_url }}"><span class="fecha">{% include fecha.html d=p.date %}</span><span class="tit">{{ p.title }}</span></a></li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endfor %}

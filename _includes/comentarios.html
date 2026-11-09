@@ -1,0 +1,15 @@
+{%- if site.comentarios.cusdis_app_id != "" and page.comentarios != false -%}
+<section class="comentarios" aria-labelledby="titulo-comentarios">
+  <h2 class="rotulo" id="titulo-comentarios">Comentarios</h2>
+  <p class="aviso">Los comentarios se publican después de que los leemos. No hace falta registrarse.</p>
+  <div id="cusdis_thread"
+    data-host="https://cusdis.com"
+    data-app-id="{{ site.comentarios.cusdis_app_id }}"
+    data-page-id="{{ page.id }}"
+    data-page-url="{{ page.url | absolute_url }}"
+    data-page-title="{{ page.title | escape }}"
+    data-theme="dark"></div>
+  <script src="https://cusdis.com/js/widget/lang/es.js"></script>
+  <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+</section>
+{%- endif -%}

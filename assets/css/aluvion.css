@@ -1,0 +1,287 @@
+/* Aluvión — escritos.
+   Concepto: blog de lectura a la k-punk sobre papel negro texturado de los flyers.
+   Columna de lectura + barra lateral de archivo; la tipografía gastada es el único gesto fuerte. */
+
+@font-face {
+  font-family: "Sun Zoom Spark";
+  src: url("../fonts/SunZoomSpark.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --negro: #0e0e0d;
+  --carbon: #191917;
+  --tiza: #ecebe6;
+  --ceniza: #a3a29b;
+  --humo: #6d6c66;
+  --linea: #2e2d2a;
+
+  --f-marca: "Sun Zoom Spark", "Encode Sans Condensed", "Arial Narrow", Impact, sans-serif;
+  --f-texto: "Encode Sans", "Segoe UI", Roboto, Arial, sans-serif;
+  --f-rotulo: "Encode Sans Condensed", "Arial Narrow", Arial, sans-serif;
+  --f-bajada: "Montserrat", "Segoe UI", Arial, sans-serif;
+
+  --t-base: 1.125rem;
+  --medida: 66ch;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--negro);
+  color: var(--tiza);
+  font-family: var(--f-texto);
+  font-size: var(--t-base);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Textura de papel de los flyers */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .11;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse at 50% 0%, transparent 40%, rgba(0,0,0,.55) 100%);
+}
+
+.envoltura {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+a { color: inherit; text-decoration-color: var(--humo); text-underline-offset: .2em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-color: var(--tiza); }
+a:focus-visible { outline: 2px solid var(--tiza); outline-offset: 3px; }
+
+/* Letras gastadas: Sun Zoom Spark, la letra de la marca */
+.gastada {
+  font-family: var(--f-marca);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  line-height: .95;
+  text-wrap: balance;
+}
+
+/* Encabezado */
+.cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  padding-block: 28px 22px;
+  border-bottom: 1px solid var(--linea);
+}
+.cabecera .logo img { display: block; height: 58px; width: auto; }
+.menu { display: flex; gap: 24px; flex-wrap: wrap; }
+.menu a {
+  font-family: var(--f-rotulo);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ceniza);
+}
+.menu a:hover, .menu a[aria-current="page"] { color: var(--tiza); }
+
+/* Grilla principal */
+.cuerpo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 72px;
+  padding-block: 56px 80px;
+}
+.cuerpo > * { min-width: 0; }
+
+/* Portada */
+.consigna { margin: 0 0 56px; }
+.consigna p { margin: 0; }
+.consigna .grande { font-size: clamp(2.6rem, 7vw, 4.6rem); }
+.consigna .chica {
+  margin-top: 18px;
+  max-width: 52ch;
+  color: var(--ceniza);
+  font-size: 1rem;
+}
+
+.rotulo {
+  font-family: var(--f-rotulo);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ceniza);
+}
+
+.entradas { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.entrada {
+  display: grid;
+  gap: 12px;
+  padding-block: 34px;
+  border-top: 1px solid var(--linea);
+}
+.entrada:last-child { border-bottom: 1px solid var(--linea); }
+.entrada h2 { margin: 0; font-size: clamp(1.9rem, 4.2vw, 2.9rem); }
+.entrada h2 a { text-decoration: none; }
+.entrada h2 a:hover { color: #fff; }
+.entrada .bajada { margin: 0; }
+.entrada .extracto { margin: 0; color: var(--ceniza); max-width: var(--medida); font-size: 1rem; line-height: 1.65; }
+.entrada .seguir { font-family: var(--f-rotulo); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: .8rem; }
+
+.bajada {
+  font-family: var(--f-bajada);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--tiza);
+  font-size: 1.12rem;
+  line-height: 1.45;
+}
+
+/* Lectura */
+.texto-cabeza { margin-bottom: 44px; display: grid; gap: 16px; }
+.texto-cabeza h1 { margin: 0; font-size: clamp(2.6rem, 7.5vw, 5rem); }
+.texto-cabeza .bajada { margin: 0; font-size: 1.25rem; max-width: 40ch; }
+
+.prosa { max-width: var(--medida); }
+.prosa p { margin: 0 0 1.25em; text-align: justify; text-justify: inter-word; -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 7 3 3; }
+.prosa h2 {
+  font-family: var(--f-rotulo);
+  font-weight: 800;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  margin: 2.4em 0 .9em;
+  text-wrap: balance;
+}
+.prosa h3 {
+  font-family: var(--f-bajada);
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1.2rem;
+  margin: 2em 0 .8em;
+}
+.prosa blockquote {
+  margin: 2em 0;
+  padding: 4px 0 4px 24px;
+  border-left: 2px solid var(--humo);
+  color: var(--ceniza);
+  font-size: 1.04rem;
+}
+.prosa blockquote p:last-child { margin-bottom: 0; }
+.prosa em { font-style: italic; }
+
+.pie-texto {
+  max-width: var(--medida);
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--linea);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.pie-texto a { font-family: var(--f-rotulo); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; font-size: .82rem; text-decoration: none; color: var(--ceniza); }
+.pie-texto a:hover { color: var(--tiza); }
+
+/* Barra lateral */
+.lateral { display: grid; gap: 44px; align-content: start; font-size: .95rem; }
+.lateral h2 { margin: 0 0 14px; }
+.lateral p { margin: 0 0 .8em; color: var(--ceniza); line-height: 1.6; }
+.archivo { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.archivo .anio { font-family: var(--f-rotulo); font-weight: 800; font-size: 1.1rem; letter-spacing: .06em; color: var(--humo); }
+.archivo a { text-decoration: none; display: grid; gap: 2px; line-height: 1.35; }
+.archivo a:hover .tit { text-decoration: underline; text-decoration-color: var(--humo); }
+.archivo .fecha { font-family: var(--f-rotulo); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--humo); }
+.archivo [aria-current="page"] .tit { color: #fff; font-weight: 600; }
+
+/* Pie */
+.pie {
+  border-top: 1px solid var(--linea);
+  padding-block: 28px 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--humo);
+  font-family: var(--f-rotulo);
+  font-size: .8rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.pie img { height: 34px; width: auto; display: block; opacity: .8; }
+
+@media (max-width: 860px) {
+  .cuerpo { grid-template-columns: minmax(0, 1fr); gap: 56px; padding-block: 40px 56px; }
+  .lateral { border-top: 1px solid var(--linea); padding-top: 40px; }
+  .cabecera .logo img { height: 46px; }
+}
+@media (max-width: 480px) {
+  :root { --t-base: 1.06rem; }
+  .menu { gap: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+
+/* Categoría */
+.categoria {
+  display: inline-block;
+  margin-right: .6em;
+  padding: 2px 8px 1px;
+  border: 1px solid var(--humo);
+  color: var(--tiza);
+  text-decoration: none;
+}
+.categoria:hover { border-color: var(--tiza); }
+.cuenta { color: var(--humo); }
+.grupo { margin-bottom: 44px; }
+.grupo h2 { margin: 0 0 16px; }
+
+/* Imágenes entre párrafos */
+.prosa .imagen { margin: 2.2em 0; }
+.prosa .imagen img { display: block; width: 100%; height: auto; }
+.prosa .imagen figcaption {
+  margin-top: 10px;
+  font-family: var(--f-rotulo);
+  font-size: .8rem;
+  letter-spacing: .06em;
+  color: var(--humo);
+}
+
+/* Redes */
+.redes { display: flex; gap: 18px; flex-wrap: wrap; }
+.redes a {
+  font-family: var(--f-rotulo);
+  font-weight: 600;
+  font-size: .82rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ceniza);
+}
+.redes a:hover { color: var(--tiza); }
+
+/* Comentarios */
+.comentarios { max-width: var(--medida); margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--linea); }
+.comentarios h2 { margin: 0 0 8px; }
+.comentarios .aviso { margin: 0 0 20px; color: var(--humo); font-size: .9rem; }
